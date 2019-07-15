@@ -111,6 +111,10 @@ function! docker#container#functions(ctx, key) abort
 	let l:entry = a:ctx.content[a:ctx.select]
 	if a:key ==# 'u'
 		call s:docker_start_container(a:ctx)
+    call popup_close(a:ctx.id)
+    call docker#monitor#start(l:entry.Id)
+	elseif a:key ==# 'U'
+		call s:docker_stop_container(a:ctx)
 	elseif a:key ==# 's'
 		call s:docker_stop_container(a:ctx)
 	elseif a:key ==# ''
